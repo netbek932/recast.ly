@@ -6,7 +6,9 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "test": "live-server --open=./SpecRunner.html --port=8081"
+    "test": "live-server --open=./SpecRunner.html --port=8080",
+    "babel": "npx babel . --out-dir=compiled --presets=@babel/preset-react --ignore=node_modules,compiled --source-maps=inline --watch",
+    "start" : "index.html"
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
