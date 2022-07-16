@@ -4,6 +4,7 @@ import VideoPlayer from './VideoPlayer.js';
 import searchYouTube from '../lib/searchYouTube.js';
 import Search from './Search.js';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,10 +15,23 @@ class App extends React.Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick(selectedVideo) {
     this.setState({currentVideo: selectedVideo});
+  }
+
+  handleChange(e) {
+    searchYouTube(e.target.value, (res) => {
+      this.setState({videoData: res, currentVideo: res[0]});
+    });
+  }
+
+  debouncedHandleChange () {
+    useMemo(
+      () => _.debounce(handleChange(e), 500),
+      [props, this.state]);
   }
 
   componentDidMount() {
@@ -26,22 +40,12 @@ class App extends React.Component {
     });
   }
 
-  // search(query) {
-  //   searchYouTube()
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       this.setState({videoData: res, currentVideo: res[0]});
-  //     });
-
-  // }
-
-
   render () {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em><Search search={this.searchYouTube} /></h5></div>
+            <div><h5><em>search</em><Search search={this.searchYouTube} handleChange={this.handleChange}/></h5></div>
           </div>
         </nav>
         <div className="row">
@@ -49,7 +53,7 @@ class App extends React.Component {
             <div><h5><em>videoPlayer</em><VideoPlayer video={this.state.currentVideo} /></h5></div>
           </div>
           <div className="col-md-5">
-            <div><h5><em>videoList</em> <VideoList videos={exampleVideoData} handleClick={this.handleClick} /> </h5></div>
+            <div><h5><em>videoList</em> <VideoList videos={this.state.videoData} handleClick={this.handleClick} /> </h5></div>
           </div>
         </div>
       </div>

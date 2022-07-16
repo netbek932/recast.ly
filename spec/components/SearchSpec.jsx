@@ -1,6 +1,6 @@
 import App from '../../src/components/App.js';
 
-describe ('Search', function() {
+xdescribe ('Search', function() {
   var {
     Simulate,
     renderIntoDocument,

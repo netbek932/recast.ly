@@ -48,7 +48,7 @@ describe('App', function() {
     });
   });
 
-  describe('when rendering live data from YouTube', function() {
+  xdescribe('when rendering live data from YouTube', function() {
     beforeEach(function() {
       app = renderIntoDocument(
         <App />
