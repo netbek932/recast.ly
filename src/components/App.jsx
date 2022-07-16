@@ -1,6 +1,7 @@
 import exampleVideoData from '../data/exampleVideoData.js';
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
+import searchYouTube from '../lib/searchYouTube.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,12 +18,17 @@ class App extends React.Component {
     this.setState({currentVideo: selectedVideo});
   }
 
+  // search(query) {
+  //   this.props.searchYouTube()
+  //   this.setState({});
+  // }
+
   render () {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <div><h5><em>search</em> </h5></div>
           </div>
         </nav>
         <div className="row">
