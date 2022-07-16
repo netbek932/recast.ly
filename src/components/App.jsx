@@ -9,7 +9,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      videoData: [],
+      videoData: exampleVideoData,
       currentVideo: exampleVideoData[0]
     };
 
@@ -21,22 +21,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    searchYouTube()
-      .then(res => res.json())
-      .then(res => {
-        this.setState({videoData: res, currentVideo: res[0]});
-      });
-
+    searchYouTube('react', (res) => {
+      this.setState({videoData: res, currentVideo: res[0]});
+    });
   }
 
-  search(query) {
-    searchYouTube()
-      .then(res => res.json())
-      .then(res => {
-        this.setState({videoData: res, currentVideo: res[0]});
-      });
+  // search(query) {
+  //   searchYouTube()
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       this.setState({videoData: res, currentVideo: res[0]});
+  //     });
 
-  }
+  // }
 
 
   render () {
@@ -44,7 +41,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em><Search search={this.search} /></h5></div>
+            <div><h5><em>search</em><Search search={this.searchYouTube} /></h5></div>
           </div>
         </nav>
         <div className="row">

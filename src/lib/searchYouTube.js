@@ -20,4 +20,3 @@ var searchYouTube = (query, callback) => {
 };
 
 export default searchYouTube;
-//[{ order: 'video-list-entry-title' }]
