@@ -2,12 +2,14 @@ import exampleVideoData from '../data/exampleVideoData.js';
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 import searchYouTube from '../lib/searchYouTube.js';
+import Search from './Search.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      videoData: [],
       currentVideo: exampleVideoData[0]
     };
 
@@ -18,17 +20,31 @@ class App extends React.Component {
     this.setState({currentVideo: selectedVideo});
   }
 
-  // search(query) {
-  //   this.props.searchYouTube()
-  //   this.setState({});
-  // }
+  componentDidMount() {
+    searchYouTube()
+      .then(res => res.json())
+      .then(res => {
+        this.setState({videoData: res, currentVideo: res[0]});
+      });
+
+  }
+
+  search(query) {
+    searchYouTube()
+      .then(res => res.json())
+      .then(res => {
+        this.setState({videoData: res, currentVideo: res[0]});
+      });
+
+  }
+
 
   render () {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> </h5></div>
+            <div><h5><em>search</em><Search search={this.search} /></h5></div>
           </div>
         </nav>
         <div className="row">
